@@ -17,7 +17,7 @@ var fulltext = [];
 var words = [];
 
 
-for (i = 1; i < children.length; i++){
+for (i = 0; i < children.length; i++){
 	var text = children[i].innerHTML;
 	fulltext += words.concat(text);
 }
@@ -81,6 +81,7 @@ function preventBreak() {//this function prevents from breaking one word into li
       }
 			if (i === (spans.length - 1)){
 				let block = document.createElement('div');
+				block.style.textAlign = 'justify';
 				for(i = 0; i < currentdiv.length; i++){
 					block.innerHTML += currentdiv[i].innerHTML;
 				}
@@ -88,7 +89,9 @@ function preventBreak() {//this function prevents from breaking one word into li
 
 				document.body.appendChild(block);
 				break;
+
 			}
+
   }
 
 }//end of preventBreak() function
