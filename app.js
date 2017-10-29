@@ -3,33 +3,16 @@ let div = document.getElementById('text');
 let children = document.getElementById('text').children;
 var fulltext = [];
 
-var lines = []; //i should make a lines and them start them from new page
-let divs = [];
-
-// for (i = 0; i < children.length; i++) { //adding content in all div child nodes into array
-//   fulltext += children[i].textContent;
-// }
+// function outerWidth(elem){
+// 	var curStyle = elem.currentStyle || window.getComputedStyle(elem);
+// 	outerHeight = elem.offsetHeight;
+// 	outerHeight += parseInt(curStyle.marginTop);
+// 	outerHeight += parseInt(curStyle.marginBottom);
 //
-// let symbolstotal = fulltext.split("").length;
-
-// console.log(symbolstotal);
-
-
-// console.log(height);
-
-
-function outerWidth(elem){
-	var curStyle = elem.currentStyle || window.getComputedStyle(elem);
-	outerHeight = elem.offsetHeight;
-	outerHeight += parseInt(curStyle.marginTop);
-	outerHeight += parseInt(curStyle.marginBottom);
-
-	// console.log(outerHeight);
-    return outerHeight //If you'd like to return the outerheight
-}
-outerWidth(div);
-
-
+// 	// console.log(outerHeight);
+//     return outerHeight //If you'd like to return the outerheight
+// }
+// outerWidth(div);
 
 var words = [];
 
@@ -52,9 +35,6 @@ function preventBreak() {//this function prevents from breaking one word into li
   let wordslength = 0; //counts the sum of the letters of all the words in one row
 	let currentline = '';
 
-	// lines.push(span);
-	// let page = document.createElement('div');
-	// document.body.appendChild(page);
 
   for (i = 0;  i < setOfWords.length; i++){
     if (wordslength <= 100){
@@ -62,58 +42,55 @@ function preventBreak() {//this function prevents from breaking one word into li
 			wordslength += setOfWords[i].length;
 
     }	else {
-				// lines.push(line);
 				let span = document.createElement('span');
-			  // let spans = [];
-				// spans.push(span);
 				span.textContent = currentline;
 				div.appendChild(span);
 				currentline = ' ';
 	      wordslength = 0;
 	      i--;
       }
+
 			if (i === (setOfWords.length - 1)){
 				let span = document.createElement('span');
 				span.textContent = currentline;
 				div.appendChild(span);
 			}
-			// div.appendChild(span);
   }
 
 	let spans = document.getElementsByTagName('span');
+	let spanslength = 0;
+	let currentdiv = [];
+	div.style.display = 'none';
+
 	for (i = 0;  i < spans.length; i++){
-		// if (lines.length > 5) {
-		// 	document.body.appendChild(page);
-		// 	console.log(page);
-		// 	lines = [];
-		// }
-		let spanslength = 0;
-		let currentdiv = [];
+		console.log(i);
 
-		if (spanslength <= 5){
-			currentdiv += spans[i];
-			spanslength += spans[i].length;
+    if (spanslength <= 3){
+			currentdiv.push(spans[i]);
+			spanslength += 1;
+    }	else {
+				let block = document.createElement('div');
+				for(i = 0; i < currentdiv.length; i++){
+					block.innerHTML += currentdiv[i].innerHTML;
+				}
+				console.log(block);
 
-		}	else {
-				// lines.push(line);
-				let div = document.createElement('div');
-				// let spans = [];
-				// spans.push(span);
-				div.appendChild(span);
+				document.body.appendChild(block);
 				currentdiv = [];
-				spanslength = 0;
-				i--;
-			}
+	      spanslength = 0;
+      }
 			if (i === (spans.length - 1)){
-				let div = document.createElement('div');
-				// div.appendChild(span);
-			}
-			// div.appendChild(span);
-	}
+				let block = document.createElement('div');
+				for(i = 0; i < currentdiv.length; i++){
+					block.innerHTML += currentdiv[i].innerHTML;
+				}
+				console.log(block);
 
+				document.body.appendChild(block);
+				break;
+			}
+  }
 
 }//end of preventBreak() function
- // console.log(div);
 
   preventBreak();
-	console.log(document.getElementsByTagName('span'));
