@@ -6,41 +6,69 @@ var fulltext = [];
 var lines = []; //i should make a lines and them start them from new page
 let divs = [];
 var words = [];
-let page = document.createElement('div');
+// let pageN = document.createElement('div');
 
-function createPage(){
-	let page = document.createElement('div');
-	maindiv.appendChild(page);
+function createPage(number){
+	let pageN = document.createElement('div');
+	maindiv.appendChild(pageN);
+	pageN.setAttribute("id", number);
 }
+
+function outerWidth(elem){
+	var curStyle = elem.currentStyle || window.getComputedStyle(elem);
+	outerHeight = elem.offsetHeight;
+	outerHeight += parseInt(curStyle.marginTop);
+	outerHeight += parseInt(curStyle.marginBottom);
+
+	// console.log(outerHeight);
+    return outerHeight //If you'd like to return the outerheight
+}
+
 
 primarydiv.style.display = 'none';
 
-createPage();//creates first page
-
-for (i = 0; i < children.length; i++){ //number of tags which are children of maindiv
-	// var text = children[i].innerHTML;
-	// fulltext += words.concat(text);
-	let tagname = children[i].tagName;
-	let child = document.createElement(tagname.toString());
-	page.appendChild(child);
-	maindiv.appendChild(page);
-	console.log(children[i]);
-
-	let setOfWords = children[i].innerHTML.split(' ');
+// createPage(1);//creates first page
 
 
+let p = 1; //page number
 
-	for (c = 0; c < setOfWords.length; c++){ //number of words in each maindiv children = block of text
-		let span = document.createElement('span');
-		span.textContent = setOfWords[c] + ' ';
-		child.appendChild(span);
+let newpage = true;
+
+do {
+
+	for (i = 0; i < children.length; i++){ //number of tags which are children of maindiv
+		let tagname = children[i].tagName;
+		let child = document.createElement(tagname.toString());
+		// console.log(pageN.id);
+		let setOfWords = children[i].innerHTML.split(' ');
+		
+		let pageN = document.createElement('div');
+		pageN.appendChild(child);
+		pageN.setAttribute("id", p);
+
+			for (c = 0; c < setOfWords.length; c++){ //number of words in each maindiv children = block of text
+				let span = document.createElement('span');
+
+
+				if (outerWidth(pageN)<200){
+					// console.log('hi!!!');
+					span.textContent = setOfWords[c] + ' ';
+					child.appendChild(span);
+					console.log(outerWidth(pageN));
+
+				} else {
+					p++;
+
+					maindiv.appendChild(pageN);
+					console.log(p);
+				}
+			}
 
 	}
 
-	// if (){
-	//
-	// }
-}
+newpage = false;
+
+} while (newpage == true)
 
 console.log(maindiv);
 
@@ -54,16 +82,7 @@ console.log(maindiv);
 
 
 
-function outerWidth(elem){
-	var curStyle = elem.currentStyle || window.getComputedStyle(elem);
-	outerHeight = elem.offsetHeight;
-	outerHeight += parseInt(curStyle.marginTop);
-	outerHeight += parseInt(curStyle.marginBottom);
 
-	// console.log(outerHeight);
-    return outerHeight //If you'd like to return the outerheight
-}
-outerWidth(maindiv);
 
 
 
