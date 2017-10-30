@@ -8,63 +8,71 @@ let divs = [];
 var words = [];
 // let pageN = document.createElement('div');
 
-function createPage(number){
-	let pageN = document.createElement('div');
-	maindiv.appendChild(pageN);
-	pageN.setAttribute("id", number);
-}
+// function createPage(number){
+// 	let pageN = document.createElement('div');
+// 	maindiv.appendChild(pageN);
+// 	pageN.setAttribute("id", number);
+// }
 
-function outerWidth(elem){
+function outerWidth(elem){ //measures the height of the element
 	var curStyle = elem.currentStyle || window.getComputedStyle(elem);
 	outerHeight = elem.offsetHeight;
 	outerHeight += parseInt(curStyle.marginTop);
 	outerHeight += parseInt(curStyle.marginBottom);
 
-	// console.log(outerHeight);
+	console.log(outerHeight);
     return outerHeight //If you'd like to return the outerheight
 }
 
-
-primarydiv.style.display = 'none';
+primarydiv.style.display = 'none'; //hides initial text, maybe will be not needed if we will use the direct children
 
 // createPage(1);//creates first page
 
 
 let p = 1; //page number
 
-let newpage = true;
+let newpage = true;//serves to close the loop after each word will be added
 
 do {
+
+	let pageN = document.createElement('div');
+	pageN.setAttribute("id", p);
+	maindiv.appendChild(pageN);
 
 	for (i = 0; i < children.length; i++){ //number of tags which are children of maindiv
 		let tagname = children[i].tagName;
 		let child = document.createElement(tagname.toString());
 		// console.log(pageN.id);
 		let setOfWords = children[i].innerHTML.split(' ');
-		
-		let pageN = document.createElement('div');
 		pageN.appendChild(child);
-		pageN.setAttribute("id", p);
+
+
 
 			for (c = 0; c < setOfWords.length; c++){ //number of words in each maindiv children = block of text
-				let span = document.createElement('span');
 
-
-				if (outerWidth(pageN)<200){
+				if (outerWidth(pageN)<300){
 					// console.log('hi!!!');
+					let span = document.createElement('span');
+
 					span.textContent = setOfWords[c] + ' ';
 					child.appendChild(span);
-					console.log(outerWidth(pageN));
 
 				} else {
-					p++;
-
+					p++; //increases pages number
+					c--; //decreases counter to add current word to the next page
+					let pageN = document.createElement('div');
+					// pageN.appendChild(child);
+					pageN.setAttribute("id", p);
+console.log(pageN);
 					maindiv.appendChild(pageN);
-					console.log(p);
+					// console.log(p);
+					console.log(outerWidth(document.getElementById(p)));
+
 				}
 			}
 
 	}
+
 
 newpage = false;
 
