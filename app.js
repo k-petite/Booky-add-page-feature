@@ -20,7 +20,7 @@ function outerWidth(elem){ //measures the height of the element
 	outerHeight += parseInt(curStyle.marginTop);
 	outerHeight += parseInt(curStyle.marginBottom);
 
-	console.log(outerHeight);
+	// console.log(outerHeight);
     return outerHeight //If you'd like to return the outerheight
 }
 
@@ -32,12 +32,13 @@ primarydiv.style.display = 'none'; //hides initial text, maybe will be not neede
 let p = 1; //page number
 
 let newpage = true;//serves to close the loop after each word will be added
-
+let pageN = document.createElement('div');
+maindiv.appendChild(pageN);
+pageN.setAttribute("id", 1);
+// let pageN = document.getElementById('1');
+// console.log(pageN);
 do {
 
-	let pageN = document.createElement('div');
-	pageN.setAttribute("id", p);
-	maindiv.appendChild(pageN);
 
 	for (i = 0; i < children.length; i++){ //number of tags which are children of maindiv
 		let tagname = children[i].tagName;
@@ -47,36 +48,37 @@ do {
 		pageN.appendChild(child);
 
 
-
 			for (c = 0; c < setOfWords.length; c++){ //number of words in each maindiv children = block of text
-
-				if (outerWidth(pageN)<300){
+				// console.log(pageN);
+				if (outerWidth(pageN) < 200){
 					// console.log('hi!!!');
 					let span = document.createElement('span');
 
 					span.textContent = setOfWords[c] + ' ';
 					child.appendChild(span);
+					console.log(outerWidth(pageN), pageN);
 
 				} else {
+
 					p++; //increases pages number
 					c--; //decreases counter to add current word to the next page
-					let pageN = document.createElement('div');
-					// pageN.appendChild(child);
-					pageN.setAttribute("id", p);
-console.log(pageN);
-					maindiv.appendChild(pageN);
-					// console.log(p);
-					console.log(outerWidth(document.getElementById(p)));
+					let nextpage = document.createElement('div');
+					nextpage.setAttribute("id", p);
+					maindiv.appendChild(nextpage);
+
+					pageN = document.getElementById(p);
+
+					console.log(p);
 
 				}
+
 			}
 
 	}
 
-
 newpage = false;
 
-} while (newpage == true)
+} while (newpage === true);
 
 console.log(maindiv);
 
