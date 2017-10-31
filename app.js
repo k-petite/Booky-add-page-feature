@@ -56,13 +56,12 @@ do {
 				// console.log(pageN);
 				if (outerWidth(pageN) < 200){
 					// console.log('hi!!!');
-					let span = document.createElement('span');
+					var span = document.createElement('span');
 
 					// console.log(child);
-					console.log(child);
+					// console.log(child);
 
 					span.textContent = setOfWords[c] + ' ';
-					child.appendChild(span);
 					// console.log(outerWidth(pageN), pageN);
 
 				} else {
@@ -76,10 +75,11 @@ do {
 					nextpage.setAttribute("id", p);
 					maindiv.appendChild(nextpage);
 
-					let child = document.createElement(tagname.toString());
+					child = document.createElement(tagname.toString());
 					child.setAttribute("id", t*1000);
 
 					pageN = document.getElementById(p);
+
 					pageN.appendChild(child);
 					child = document.getElementById(t*1000);
 					t++;
@@ -87,6 +87,8 @@ do {
 					console.log(child);
 
 				}
+				child.appendChild(span);
+
 
 			}
 
