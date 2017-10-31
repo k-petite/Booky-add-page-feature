@@ -42,11 +42,10 @@ do {
 
 	for (i = 0; i < children.length; i++){ //number of tags which are children of maindiv
 		let tagname = children[i].tagName;
-		let child = document.createElement(tagname.toString());
 		// console.log(pageN.id);
 		let setOfWords = children[i].innerHTML.split(' ');
+		let child = document.createElement(tagname.toString());
 		pageN.appendChild(child);
-
 
 			for (c = 0; c < setOfWords.length; c++){ //number of words in each maindiv children = block of text
 				// console.log(pageN);
@@ -54,12 +53,14 @@ do {
 					// console.log('hi!!!');
 					let span = document.createElement('span');
 
+					// console.log(child);
+
 					span.textContent = setOfWords[c] + ' ';
 					child.appendChild(span);
-					console.log(outerWidth(pageN), pageN);
+					// console.log(outerWidth(pageN), pageN);
 
 				} else {
-
+					let child = document.createElement(tagname.toString());
 					p++; //increases pages number
 					c--; //decreases counter to add current word to the next page
 					let nextpage = document.createElement('div');
@@ -67,14 +68,17 @@ do {
 					maindiv.appendChild(nextpage);
 
 					pageN = document.getElementById(p);
-
-					console.log(p);
+					pageN.appendChild(child);
+					// console.log(document.getElementById(1));
 
 				}
 
 			}
 
 	}
+if (pageN.textContent ===''){
+			text.removeChild(pageN);
+		}
 
 newpage = false;
 
