@@ -37,6 +37,8 @@ maindiv.appendChild(pageN);
 pageN.setAttribute("id", 1);
 // let pageN = document.getElementById('1');
 // console.log(pageN);
+
+let t = 1;
 do {
 
 
@@ -45,6 +47,9 @@ do {
 		// console.log(pageN.id);
 		let setOfWords = children[i].innerHTML.split(' ');
 		let child = document.createElement(tagname.toString());
+		console.log(child);
+		child.setAttribute("id", t*1000);
+		t++;
 		pageN.appendChild(child);
 
 			for (c = 0; c < setOfWords.length; c++){ //number of words in each maindiv children = block of text
@@ -54,22 +59,32 @@ do {
 					let span = document.createElement('span');
 
 					// console.log(child);
+					console.log(child);
 
 					span.textContent = setOfWords[c] + ' ';
 					child.appendChild(span);
 					// console.log(outerWidth(pageN), pageN);
 
 				} else {
-					let child = document.createElement(tagname.toString());
+
+
+
 					p++; //increases pages number
 					c--; //decreases counter to add current word to the next page
+
 					let nextpage = document.createElement('div');
 					nextpage.setAttribute("id", p);
 					maindiv.appendChild(nextpage);
 
+					let child = document.createElement(tagname.toString());
+					child.setAttribute("id", t*1000);
+
 					pageN = document.getElementById(p);
 					pageN.appendChild(child);
+					child = document.getElementById(t*1000);
+					t++;
 					// console.log(document.getElementById(1));
+					console.log(child);
 
 				}
 
