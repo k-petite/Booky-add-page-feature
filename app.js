@@ -12,6 +12,15 @@ function outerWidth(elem){ //measures the height of the element
     return outerHeight //If you'd like to return the outerheight
 }
 
+function height(el) {
+	var element = document.getElementById(el.toString());
+	var positionInfo = element.getBoundingClientRect();
+	var height = positionInfo.height;
+	var width = positionInfo.width;
+	console.log(height);
+	return height;
+}
+
 primarydiv.style.display = 'none'; //hides initial text, maybe will be not needed if we will use the direct children
 
 
@@ -32,11 +41,11 @@ do { //this loop will be performed untill all the last word of the text will be 
 		child.setAttribute("id", t*1000);
 		t++;
 		pageN.appendChild(child);
+		// console.log(height(p));
 
 			for (c = 0; c < setOfWords.length; c++){ //number of words in each maindiv children = block of text
 				var span = document.createElement('span');
-
-				if (outerWidth(pageN) < 200){
+				if (height(p) < 200){
 					span.textContent = setOfWords[c] + ' ';
 
 				} else {
@@ -47,12 +56,13 @@ do { //this loop will be performed untill all the last word of the text will be 
 					maindiv.appendChild(nextpage);
 					child = document.createElement(tagname.toString());
 					child.setAttribute("id", t*1000);
+					child.dis
 					pageN = document.getElementById(p);
 
 					let sp = document.getElementsByTagName('span');//adds a last word which didnt fit on the next page
 					let lastword = sp[sp.length-1];
 					pageN.appendChild(child);
-					
+
 					child = document.getElementById(t*1000);
 					t++;
 					child.appendChild(lastword);

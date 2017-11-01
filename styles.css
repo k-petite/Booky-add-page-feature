@@ -1,0 +1,28 @@
+/* Main styles */
+/*@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&Roboto:300');*/
+
+/* Variables */
+
+/*:root {
+  --color-title-bg: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+  --color-title: #124c4b;
+  --color-win: #bcffcf;
+  --color-lose: #e68a8a;
+  --color-start: rgb(123, 222, 201);
+  --color-neutral: #445069;
+  --color-neutral-light: #D2D2D2;
+  --color-keys: #37474F;
+  --color-keys-light: #E5E5E5;
+  --color-button: #0f9997;
+  --color-gamover: black;
+  --font-size-large: 60px;
+  --font-size-medium: 20px;
+  --transition: all .2s ease-in-out;
+}*/
+
+/* main */
+
+* {
+  box-sizing: border-box;
+  border: 0.1px solid red;
+}
