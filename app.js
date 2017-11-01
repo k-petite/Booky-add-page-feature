@@ -27,37 +27,64 @@ do { //this loop will be performed untill all the last word of the text will be 
 	for (i = 0; i < children.length; i++){ //number of tags which are children of maindiv
 		let tagname = children[i].tagName;
 		let setOfWords = children[i].innerHTML.split(' ');
-		let child = document.createElement(tagname.toString());
-		console.log(child);
+		var child = document.createElement(tagname.toString());
+		// console.log(document.getElementsByTagName('p'));
 		child.setAttribute("id", t*1000);
 		t++;
 		pageN.appendChild(child);
 
 			for (c = 0; c < setOfWords.length; c++){ //number of words in each maindiv children = block of text
 				var span = document.createElement('span');
+
 				if (outerWidth(pageN) < 200){
 					span.textContent = setOfWords[c] + ' ';
+
 				} else {
 					p++; //increases pages number
-					c--; //decreases counter to add current word to the next page
+					c--; //decreases counter to add current word to the next page as it was found as extra word on the current page
 					let nextpage = document.createElement('div');
 					nextpage.setAttribute("id", p);
 					maindiv.appendChild(nextpage);
 					child = document.createElement(tagname.toString());
 					child.setAttribute("id", t*1000);
 					pageN = document.getElementById(p);
-					let sp = document.getElementsByTagName('span');
+
+					let sp = document.getElementsByTagName('span');//adds a last word which didnt fit on the next page
 					let lastword = sp[sp.length-1];
 					pageN.appendChild(child);
+					
 					child = document.getElementById(t*1000);
-					child.appendChild(lastword);
 					t++;
+					child.appendChild(lastword);
+					// console.log(document.getElementsByTagName('p'));
+
+					let emptytag = document.getElementById((t-2)*1000);//-1 to get to the current element and -1 to get to the previous
+					// console.log(emptytag.innerHTML, emptytag);
+
+
+					if (emptytag.innerHTML == ''){ //hides empty tag,
+							// pageN.removeChild(emptytag);
+							console.log(emptytag);
+							// t-=2;
+							// emptytag.style.display = 'none';
+					}
+
 				}
+				// console.log(child, span, t);
+
 				child.appendChild(span);
+
+				// console.log(document.getElementsByTagName('p'), span, i, c);
+
 				// console.log(child);
 			}
+			// console.log(child.textContent, child);
+
 
 	}
+
+
+
 	if (pageN.textContent ===''){
 			text.removeChild(pageN);
 	}
